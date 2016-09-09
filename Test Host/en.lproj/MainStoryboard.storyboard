@@ -1113,6 +1113,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="TableViews" id="dc2-IR-8qH"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Z4D-JG-zAq" id="Nzh-4x-NwO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d4-dI-Ro3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1488,8 +1491,14 @@
                                         <state key="normal" title="Button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Inner Button"/>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="TapViewController Inner ScrollView"/>
+                                </userDefinedRuntimeAttributes>
                             </scrollView>
                             <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label with Tap Gesture Recognizer" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eKU-mb-iWm">
                                 <rect key="frame" x="27" y="288" width="267" height="21"/>
@@ -1757,12 +1766,18 @@ Line Break
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Inner Button"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="requestLocationServicesAndNotificicationsSchedulingAccesses" destination="k4d-l4-aKf" eventType="touchUpInside" id="up3-fx-DyS"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="TapViewController Inner ScrollView"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="fud-79-Dhj"/>
