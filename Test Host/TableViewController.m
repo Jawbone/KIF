@@ -6,7 +6,9 @@
 //
 //
 
-@interface TableViewController : UITableViewController
+@interface TableViewController : UITableViewController <UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -17,6 +19,9 @@
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    // Need to set this explicitly, as the default is different between iPhone and iPad and the value is ignored if set explicitly to "none"
+    self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
@@ -27,7 +32,27 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 
     return YES;
+}
+
+// Work around a bug on iOS9 that accessibility trait Selected doesn't get set
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] == NSOrderedSame) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell setAccessibilityTraits:cell.accessibilityTraits | UIAccessibilityTraitSelected];
+    }
+
+    return indexPath;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] == NSOrderedSame) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell setAccessibilityTraits:cell.accessibilityTraits ^ UIAccessibilityTraitSelected];
+    }
     
+    return indexPath;
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
